@@ -32,12 +32,10 @@ This repository serves as both a technical demonstration and a practical guide f
 │
 ├── index.html
 ├── error.html
-├── /css
-│   └── styles.css
-├── /js
-│   └── script.js
-├── /images
-│   └── logo.png
+├── app.js
+└─── /assets
+    ├── profile_pic.jpeg
+    └── profile_pic.mp4
 
 ```
 
@@ -49,9 +47,14 @@ This repository serves as both a technical demonstration and a practical guide f
 - Provided a globally unique bucket name [daniel-agblevor].
 - Selected the region closest to the target audience for low latency.
 
-📸 ![Create bucket](screenshots/create-bucket-1.png)
-📸 ![Create bucket](screenshots/create-bucket-2.png)
-📸 ![Create bucket](screenshots/create-bucket-3.png)
+📸 Create bucket 1
+![Create bucket](screenshots/create-bucket-1.png)
+
+📸 Create bucket 2
+![Create bucket](screenshots/create-bucket-2.png)
+
+📸 Create bucket 3
+![Create bucket](screenshots/create-bucket-3.png)
 
 ---
 
@@ -60,7 +63,8 @@ This repository serves as both a technical demonstration and a practical guide f
 - Set `index.html` as the index document.
 - Added `error.html` as the error fallback.
 
-📸 ![website Hosting Settings](screenshots/website-hosting-settings.png)
+📸 website Hosting Settings
+![website Hosting Settings](screenshots/website-hosting-settings.png)
 
 ---
 
@@ -68,7 +72,8 @@ This repository serves as both a technical demonstration and a practical guide f
 - Uploaded all necessary static files.
 - Maintained a clean and logical folder structure.
 
-📸 ![Uploaded Files](screenshots/uploaded-files.png)
+📸 Uploaded Files
+![Uploaded Files](screenshots/uploaded-files.png)
 
 ---
 
@@ -76,23 +81,22 @@ This repository serves as both a technical demonstration and a practical guide f
 - Modified the **bucket policy** to allow public `GetObject` access.
 - Ensured secure and minimal access through IAM best practices.
 
-📄 ![Bucket Policy](screenshots/bucket-policy.png)
-📸 ![Permissions Tab](screenshots/permissions-tab.png)
+📄 Bucket Policy
+![Bucket Policy](screenshots/bucket-policy.png)
+
+📸 Permissions Tab
+![Permissions Tab](screenshots/permissions-tab.png)
 
 ---
 
 ### 5. 🔍 Test the Website
 - Accessed the website through the **AWS S3 endpoint**:
-```
-http://daniel-agblevor.s3-website-us-east-1.amazonaws.com
+```http://daniel-agblevor.s3-website-us-east-1.amazonaws.com```
 
-```
 - Verified full functionality of pages, images, and scripts.
 
-📸 ![website dark screenshot 1](screenshots/website-light-1.png)
-📸 ![Website light screenshot 1](screenshots/website-dark-1.png)
-📸 ![website dark screenshot 2](screenshots/website-light-2.png)
-📸 ![Website light screenshot 2](screenshots/website-dark-2.png)
+📸 website demo
+![website](screenshots/website-demo.gif)
 
 ---
 
@@ -107,7 +111,7 @@ http://daniel-agblevor.s3-website-us-east-1.amazonaws.com
 
 ## 📈 Future Enhancements
 
-- integrated the static site with a custom domain using **Route 53 DNS Management** or a third-party DNS provider like **Cloudflare**.
+- Integrate the static site with a custom domain using **Route 53 DNS Management** or a third-party DNS provider like **Cloudflare**.
 - Integrate with **CloudFront** for CDN support and HTTPS.
 - Automate deployments with **CI/CD pipelines** (GitHub Actions or AWS CodePipeline).
 - Add versioning or logging for better tracking and rollback.
@@ -126,6 +130,6 @@ http://daniel-agblevor.s3-website-us-east-1.amazonaws.com
 
 For questions, suggestions, or collaboration opportunities:
 
-**TeraSight**  
+**Daniel Agblevor**  
 📧 [mcdanagb@gmail.com]  
 🔗 [LinkedIn](https://www.linkedin.com/in/daniel-agblevor/) | [Portfolio](http://daniel-agblevor.s3-website-us-east-1.amazonaws.com)
