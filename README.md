@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🌐 AWS S3 Static Website Hosting Project
 
 This project demonstrates how to deploy a fully functional static website using **Amazon S3**, leveraging AWS cloud infrastructure for scalable and cost-effective hosting. The project showcases a complete setup, from bucket creation to access testing, along with screenshots and practical considerations for real-world deployment.
@@ -50,9 +49,9 @@ This repository serves as both a technical demonstration and a practical guide f
 - Provided a globally unique bucket name [daniel-agblevor].
 - Selected the region closest to the target audience for low latency.
 
-📸 *[screenshots/create-bucket-1.png]*
-📸 *[screenshots/create-bucket-2.png]*
-📸 *[screenshots/create-bucket-3.png]*
+📸 ![Create bucket](screenshots/create-bucket-1.png)
+📸 ![Create bucket](screenshots/create-bucket-2.png)
+📸 ![Create bucket](screenshots/create-bucket-3.png)
 
 ---
 
@@ -61,7 +60,7 @@ This repository serves as both a technical demonstration and a practical guide f
 - Set `index.html` as the index document.
 - Added `error.html` as the error fallback.
 
-📸 *[screenshots/website-hosting-settings.png]*
+📸 ![website Hosting Settings](screenshots/website-hosting-settings.png)
 
 ---
 
@@ -69,7 +68,7 @@ This repository serves as both a technical demonstration and a practical guide f
 - Uploaded all necessary static files.
 - Maintained a clean and logical folder structure.
 
-📸 *[screenshots/uploaded-files.png]*
+📸 ![Uploaded Files](screenshots/uploaded-files.png)
 
 ---
 
@@ -77,8 +76,8 @@ This repository serves as both a technical demonstration and a practical guide f
 - Modified the **bucket policy** to allow public `GetObject` access.
 - Ensured secure and minimal access through IAM best practices.
 
-📄 *[screenshots/bucket-policy.png]*  
-📸 *[screenshots/permissions-tab.png]*
+📄 ![Bucket Policy](screenshots/bucket-policy.png)
+📸 ![Permissions Tab](screenshots/permissions-tab.png)
 
 ---
 
@@ -90,11 +89,11 @@ http://daniel-agblevor.s3-website-us-east-1.amazonaws.com
 ```
 - Verified full functionality of pages, images, and scripts.
 
-📸 *[screenshots/website-light-1.png]*
-📸 *[screenshots/website-dark-1.png]*
-📸 *[screenshots/website-light-2.png]*
-📸 *[screenshots/website-dark-2.png]*
- 
+📸 ![website dark screenshot 1](screenshots/website-light-1.png)
+📸 ![Website light screenshot 1](screenshots/website-dark-1.png)
+📸 ![website dark screenshot 2](screenshots/website-light-2.png)
+📸 ![Website light screenshot 2](screenshots/website-dark-2.png)
+
 ---
 
 ## 💡 Key Accomplishments
@@ -130,31 +129,3 @@ For questions, suggestions, or collaboration opportunities:
 **TeraSight**  
 📧 [mcdanagb@gmail.com]  
 🔗 [LinkedIn](https://www.linkedin.com/in/daniel-agblevor/) | [Portfolio](http://daniel-agblevor.s3-website-us-east-1.amazonaws.com)
-
----
-=======
-# AWS S3 Static Website Hosting Guide  
-
-## 1. Create an S3 Bucket  
-- Open the **AWS S3 Console** and create a new bucket.  
-- Name the bucket according to your website's domain (e.g., `example.com`).  
-- Select the appropriate **AWS region** for your hosting needs.  
-
-## 2. Configure Static Website Hosting  
-- Navigate to the **Properties** tab of the bucket.  
-- Enable **Static Website Hosting**.  
-- Set the **index document** (e.g., `index.html`).  
-- Define an **error document** (e.g., `error.html`).  
-
-## 3. Upload Website Content  
-- Upload all static files (**HTML, CSS, JavaScript, images, etc.**) to the S3 bucket.  
-- Organize them into directories as needed.  
-
-## 4. Set Bucket Permissions  
-- Update the **bucket policy** to allow public access to the content.  
-- Ensure that all website files are **publicly readable**.  
-
-## 5. Test the Website  
-- Access the website using the **S3 endpoint URL** or a **custom domain**.  
-- Verify that all pages and resources load correctly.  
->>>>>>> afaf828c6549cba7e3328e8a61ddbcc9caa4d0a1
