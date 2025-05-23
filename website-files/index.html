@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daniel Yao Agblevor | Software & AI Solutions Architect</title>
+<style>
+  :root {
+    --color-bg-light: #f9f9f9;
+    --color-bg-dark: #121212;
+    --color-primary: #4a90e2;
+    --color-secondary: #7a8ca1;
+    --color-accent: #f5a623;
+    --color-text-light: #222;
+    --color-text-dark: #eee;
+    --color-card-bg-light: #fff;
+    --color-card-bg-dark: #1e1e1e;
+    --transition-speed: 0.3s;
+  }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--color-bg-light);
+    color: var(--color-text-light);
+    transition: background var(--transition-speed), color var(--transition-speed);
+  }
+  body.dark {
+    background: var(--color-bg-dark);
+    color: var(--color-text-dark);
+  }
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-accent);
+  }
+  header {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .profile-card {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: box-shadow var(--transition-speed);
+    background: var(--color-card-bg-light);
+  }
+  body.dark .profile-card {
+    background: var(--color-card-bg-dark);
+  }
+  .profile-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+  .profile-pic, .profile-gif {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    border-radius: 50%;
+    transition: opacity var(--transition-speed);
+  }
+  .profile-gif {
+    opacity: 0;
+  }
+  .profile-card:hover .profile-pic {
+    opacity: 0;
+  }
+  .profile-card:hover .profile-gif {
+    opacity: 1;
+  }
+  .hero-text {
+    flex: 1 1 300px;
+    max-width: 600px;
+  }
+  h1 {
+    margin: 0 0 0.25rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  h2 {
+    margin: 0 0 1.5rem 0;
+    font-weight: 400;
+    color: var(--color-secondary);
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background-color: var(--color-primary);
+    border: none;
+    color: white;
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+  }
+  .btn:hover {
+    background-color: var(--color-accent);
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem auto;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 4rem;
+  }
+  h3.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.3rem;
+  }
+
+  /* Services cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: var(--color-card-bg-light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  body.dark .card {
+    background: var(--color-card-bg-dark);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  }
+  .card h4 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+  .card p {
+    color: var(--color-secondary);
+  }
+
+  /* Modal styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal {
+    background: var(--color-card-bg-light);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  body.dark .modal {
+    background: var(--color-card-bg-dark);
+    color: var(--color-text-dark);
+  }
+  .modal h4 {
+    margin-top: 0;
+  }
+  .modal p {
+    line-height: 1.5;
+    color: var(--color-secondary);
+  }
+  .modal .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    cursor: pointer;
+    transition: color var(--transition-speed);
+  }
+  .modal .close-btn:hover {
+    color: var(--color-primary);
+  }
+
+  /* Portfolio project grid */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 1.25rem;
+  }
+  .portfolio-card {
+    background: var(--color-card-bg-light);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: box-shadow var(--transition-speed);
+  }
+  body.dark .portfolio-card {
+    background: var(--color-card-bg-dark);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  }
+  .portfolio-card:hover {
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+  }
+  .portfolio-card h5 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  .portfolio-card .category-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+
+  /* Testimonials */
+  .testimonials-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .testimonial {
+    background: var(--color-card-bg-light);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    font-style: italic;
+    color: var(--color-secondary);
+  }
+  body.dark .testimonial {
+    background: var(--color-card-bg-dark);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  }
+
+  /* About section */
+  .about-text {
+    line-height: 1.6;
+    color: var(--color-text-light);
+  }
+  body.dark .about-text {
+    color: var(--color-text-dark);
+  }
+
+  /* Contact form */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 480px;
+  }
+  label {
+    font-weight: 600;
+  }
+  input, textarea {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color var(--transition-speed);
+  }
+  input:focus, textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  button[type="submit"] {
+    align-self: flex-start;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+  }
+  button[type="submit"]:hover {
+    background-color: var(--color-accent);
+  }
+
+  /* Social icons */
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .social-icons a {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    transition: color var(--transition-speed);
+  }
+  .social-icons a:hover {
+    color: var(--color-accent);
+  }
+
+  /* Dark mode toggle button */
+  .dark-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--color-primary);
+    border: none;
+    color: white;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color var(--transition-speed);
+    z-index: 1100;
+  }
+  .dark-toggle:hover {
+    background: var(--color-accent);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="profile-card" aria-label="Profile picture of Daniel" tabindex="0">
+    <img src="assets/profile_pic.jpeg" alt="Daniel's Profile Picture" class="profile-pic" />
+    <video autoplay loop muted class="profile-gif"> 
+      <source src="assets/profile_gif.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="hero-text">
+    <h1>Daniel Yao Agblevor</h1>
+    <h2>Software & AI Solutions Architect</h2>
+    <p>Turning Complex Data into Clear Business Decisions</p>
+    <div class="cta-buttons">
+      <button class="btn" id="explore-work">Explore My Work</button>
+      <button class="btn" id="contact-me">Contact Me</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Services Section -->
+  <section id="services" aria-label="Services offered">
+    <h3 class="section-title">Services</h3>
+    <div class="cards" role="list">
+      <div class="card" tabindex="0" data-modal="service1">
+        <h4>Data Science</h4>
+        <p>Data analysis, predictive modeling, and business intelligence solutions to unlock actionable insights.</p>
+      </div>
+      <div class="card" tabindex="0" data-modal="service2">
+        <h4>AI & Machine Learning</h4>
+        <p>Custom AI models and machine learning pipelines to automate and optimize complex workflows.</p>
+      </div>
+      <div class="card" tabindex="0" data-modal="service3">
+        <h4>Web Development</h4>
+        <p>Full-stack web apps with modern UX, API integrations, and scalable architecture.</p>
+      </div>
+      <div class="card" tabindex="0" data-modal="service4">
+        <h4>Consulting</h4>
+        <p>Strategic advice on AI adoption, data-driven decision making, and software architecture.</p>
+      </div>
+      <div class="card" tabindex="0" data-modal="service5">
+        <h4>Python Automation</h4>
+        <p>Automation scripts and tools built in Python to streamline repetitive tasks and improve efficiency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" aria-label="Portfolio and case studies">
+    <h3 class="section-title">Portfolio</h3>
+
+    <div>
+      <label for="portfolio-filter">Filter by category: </label>
+      <select id="portfolio-filter" aria-controls="portfolio-grid">
+        <option value="all" selected>All</option>
+        <option value="data-science">Data Science</option>
+        <option value="ai-ml">AI/ML Solutions</option>
+        <option value="web-dev">Web Development</option>
+        <option value="automation">Automation</option>
+        <option value="healthcare-ai">Healthcare AI</option>
+      </select>
+    </div>
+
+    <div class="portfolio-grid" id="portfolio-grid" role="list">
+      <!-- Example projects -->
+      <div class="portfolio-card" tabindex="0" data-modal="proj1" data-category="data-science">
+        <span class="category-label">Data Science</span>
+        <h5>Student Enrollment Analysis</h5>
+        <p>SQL, Tableau & predictive modeling to optimize student retention.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj2" data-category="ai-ml">
+        <span class="category-label">AI/ML Solutions</span>
+        <h5>Healthcare AI Chatbot</h5>
+        <p>AI assistant for healthcare queries with GDPR/HIPAA compliance.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj3" data-category="web-dev">
+        <span class="category-label">Web Development</span>
+        <h5>Django App Enhancements</h5>
+        <p>Dark mode, AJAX search, toast notifications, and mobile UI improvements.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj4" data-category="automation">
+        <span class="category-label">Automation</span>
+        <h5>Phone & Email Extractor</h5>
+        <p>Python tool using regex & clipboard integration for data extraction.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj5" data-category="ai-ml">
+        <span class="category-label">AI/ML Solutions</span>
+        <h5>Flask Health Assistant</h5>
+        <p>RAG-based AI model for health advice with secure backend.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj6" data-category="web-dev">
+        <span class="category-label">Web Development</span>
+        <h5>Vanilla JS Frontend Structuring</h5>
+        <p>Maintainable, modular vanilla JavaScript for UI enhancements.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj7" data-category="consulting">
+        <span class="category-label">Consulting</span>
+        <h5>AI Integration in WhatsApp Business</h5>
+        <p>Custom AI assistant for customer inquiries and compliance.</p>
+      </div>
+      <div class="portfolio-card" tabindex="0" data-modal="proj8" data-category="automation">
+        <span class="category-label">Automation</span>
+        <h5>Data Science Portfolio Refinement</h5>
+        <p>Refining data science projects for portfolio and production readiness.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" aria-label="Testimonials">
+    <h3 class="section-title">Testimonials</h3>
+    <div class="testimonials-list">
+      <div class="testimonial">"Daniel consistently delivers high-quality solutions on time." – Colleague</div>
+      <div class="testimonial">"His expertise in AI and automation transformed our workflows." – Client</div>
+      <div class="testimonial">"A proactive problem solver with strong technical skills." – Manager</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" aria-label="About Daniel">
+    <h3 class="section-title">About Me</h3>
+    <p class="about-text">
+      I am Daniel Yao Agblevor, a data scientist and software architect with expertise in AI/ML, web development, and Python automation. I specialize in creating scalable, data-driven solutions that help businesses make smarter decisions and automate critical workflows. With a strong background in backend development and strategic consulting, I partner with clients to deliver practical and innovative technology outcomes.
+    </p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" aria-label="Contact Daniel">
+    <h3 class="section-title">Contact</h3>
+    <form id="contact-form" aria-label="Contact form">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+    <p>Email: <a href="mailto:mcdanagb@gmail.com">mcdanagb@gmail.com</a></p>
+    <p>Phone: <a href="tel:+233248863164">+233 (0)24 886-3164</a></p>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog" aria-label="Blog feed">
+    <h3 class="section-title">Blog</h3>
+    <ul id="blog-feed" role="list" style="list-style: none; padding-left: 0;"></ul>
+  </section>
+</main>
+
+<button class="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+
+<!-- Modals -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" role="document" tabindex="0">
+    <button class="close-btn" aria-label="Close modal">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  // Dark mode toggle logic
+  const darkToggle = document.querySelector('.dark-toggle');
+  const body = document.body;
+
+  darkToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+  });
+  // Load saved theme preference
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+  }
+
+  // Modal content for services and projects
+  const modalData = {
+    // Services
+    service1: {
+      title: "Data Science Services",
+      content: "<p>Expertise in data cleaning, analysis, visualization, and predictive modeling using Python, SQL, and BI tools. Transform raw data into actionable business intelligence.</p>"
+    },
+    service2: {
+      title: "AI & Machine Learning",
+      content: "<p>Development of AI models tailored to specific business needs, including natural language processing, recommendation systems, and automation workflows.</p>"
+    },
+    service3: {
+      title: "Web Development",
+      content: "<p>Building responsive, user-friendly web applications using modern frameworks and best practices for scalability and performance.</p>"
+    },
+    service4: {
+      title: "Consulting",
+      content: "<p>Strategic guidance on integrating AI and data science into your organization, technology roadmapping, and software architecture planning.</p>"
+    },
+    service5: {
+      title: "Python Automation",
+      content: "<p>Creating custom Python scripts and tools to automate repetitive tasks, data extraction, and integration across systems to save time and reduce errors.</p>"
+    },
+    // Projects
+    proj1: {
+      title: "Student Enrollment Analysis",
+      content: "<p>Leveraged SQL and Tableau to analyze student enrollment data and developed predictive models in Python to optimize student retention and resource allocation.</p>"
+    },
+    proj2: {
+      title: "Healthcare AI Chatbot",
+      content: "<p>Designed an AI-driven healthcare assistant that complies with GDPR/HIPAA standards, providing accurate responses and resources to patient inquiries.</p>"
+    },
+    proj3: {
+      title: "Django App Enhancements",
+      content: "<p>Enhanced an existing Django application with dark mode, AJAX-powered search, toast notifications, and a mobile-friendly navigation drawer to improve user experience.</p>"
+    },
+    proj4: {
+      title: "Phone & Email Extractor",
+      content: "<p>Built a Python utility using regex and clipboard integration to efficiently extract contact details from text data, improving data collection processes.</p>"
+    },
+    proj5: {
+      title: "Flask Health Assistant",
+      content: "<p>Developed a Flask-based AI assistant leveraging Retrieval-Augmented Generation (RAG) for secure, privacy-compliant health advice with a stateless backend.</p>"
+    },
+    proj6: {
+      title: "Vanilla JS Frontend Structuring",
+      content: "<p>Implemented modular, maintainable vanilla JavaScript codebase improvements to enhance frontend performance and usability without framework overhead.</p>"
+    },
+    proj7: {
+      title: "AI Integration in WhatsApp Business",
+      content: "<p>Created an AI assistant integrated with WhatsApp Business to respond to customer inquiries using internal compliance rules and documentation.</p>"
+    },
+    proj8: {
+      title: "Data Science Portfolio Refinement",
+      content: "<p>Refined and productionized multiple data science projects, ensuring they are portfolio-ready with clean, maintainable code and reproducible results.</p>"
+    }
+  };
+
+  // Modal handling
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalContent = document.getElementById('modal-content');
+  const closeModalBtn = modalOverlay.querySelector('.close-btn');
+
+  function openModal(key) {
+    if (!modalData[key]) return;
+    modalContent.innerHTML = `<h4>${modalData[key].title}</h4>${modalData[key].content}`;
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    modalOverlay.classList.add('active');
+    closeModalBtn.focus();
+  }
+  function closeModal() {
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    modalOverlay.classList.remove('active');
+  }
+  closeModalBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === "Escape" && modalOverlay.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Open modal on card click or keyboard (Enter/Space)
+  document.querySelectorAll('.card, .portfolio-card').forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.modal));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(card.dataset.modal);
+      }
+    });
+  });
+
+  // Portfolio filtering
+  const filterSelect = document.getElementById('portfolio-filter');
+  const portfolioGrid = document.getElementById('portfolio-grid');
+  filterSelect.addEventListener('change', () => {
+    const val = filterSelect.value;
+    const cards = portfolioGrid.querySelectorAll('.portfolio-card');
+    cards.forEach(card => {
+      if (val === 'all' || card.dataset.category === val) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // Blog feed sample external links (replace with your feed or API)
+  const blogFeed = document.getElementById('blog-feed');
+  const blogPosts = [
+    { title: "Using AI for Business Automation", url: "https://medium.com/@daniel/ai-for-business-automation" },
+    { title: "Python Tips for Data Scientists", url: "https://dev.to/daniel/python-tips-for-data-scientists-1234" },
+    { title: "Best Practices for Web UX Design", url: "https://danielblog.com/web-ux-best-practices" },
+  ];
+  blogPosts.forEach(post => {
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="${post.url}" target="_blank" rel="noopener noreferrer">${post.title}</a>`;
+    blogFeed.appendChild(li);
+  });
+
+  // CTA buttons scroll to sections
+  document.getElementById('explore-work').addEventListener('click', () => {
+    document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+  });
+  document.getElementById('contact-me').addEventListener('click', () => {
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Contact form placeholder (no backend)
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Thank you for reaching out! I will respond shortly.');
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>
