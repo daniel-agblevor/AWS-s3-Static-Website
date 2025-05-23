@@ -98,6 +98,11 @@ This repository serves as both a technical demonstration and a practical guide f
 📸 website demo
 ![website](screenshots/website-demo.gif)
 
+📸 website screenshot - light
+![website](screenshots/website-light-1.png)
+
+📸 website screenshot - dark
+![website](screenshots/website-dark-1.png)
 ---
 
 ## 💡 Key Accomplishments
